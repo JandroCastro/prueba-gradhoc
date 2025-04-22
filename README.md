@@ -1,54 +1,97 @@
-# React + TypeScript + Vite
+# 📋 Prueba Técnica - Gestión de Usuarios con Vite + Redux Toolkit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una SPA (Single Page Application) creada con **Vite** y **React**, que consume la API pública de [https://randomuser.me](https://randomuser.me) para mostrar una tabla con 100 usuarios aleatorios. Se han implementado funcionalidades como filtrado, eliminación y restauración del estado.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologías usadas
 
-## Expanding the ESLint configuration
+- [Vite](https://vitejs.dev/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Lodash (debounce)](https://lodash.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🛠️ Instalación y ejecución local
+
+1. **Clona el repositorio**
+
+```bash
+git clone https://github.com/tu-usuario/tu-repo.git
+cd tu-repo
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Instala las dependencias**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. **Inicia el servidor de desarrollo**
+
+
+```bash
+npm run dev
+```
+
+4. **Abre el navegador**
+
+
+Accede a http://localhost:5173 para ver la aplicación en funcionamiento.
+
+
+## 📦 Estructura del proyecto
+
+```bash
+src/
+│
+├── app/                # Configuración del store de Redux
+│   └── store.ts
+│
+├── features/
+│   └── users/          # Slice, API, tipos y adapters de usuario
+│       ├── usersSlice.ts
+│       ├── usersAPI.ts
+│       ├── usersTypes.ts
+│       └── usersAdapter.ts
+│
+├── pages/
+│   └── UsersTable.tsx  # Componente principal
+├── App.tsx # Renderizado principal de la herramienta
+└── main.tsx
+```
+
+
+## ✅ Funcionalidades
+
+
+✔️ Listado de 100 usuarios aleatorios en tabla.
+
+🔍 Filtro por país en tiempo real (coincidencias parciales, insensibles a mayúsculas).
+
+❌ Eliminación individual de filas.
+
+♻️ Restauración del estado completo con botón "Reset".
+
+🧹 Limpieza del filtro de país (vuelve a mostrar los usuarios pero sólo los no eliminados previamente).
+
+
+## 🧠 Detalles técnicos
+
+
+Los usuarios se almacenan en Redux como un diccionario (Record<string, User>) para acceso rápido y eficiente por ID.
+
+Las eliminaciones se manejan de forma lógica a través de un array deletedUserIds.
+
+Se puede restaurar el estado inicial completo con el botón Reset, incluso tras aplicar filtros o eliminar usuarios sin necesidad de nuevas llamadas a la API
+
+El input de país permite búsqueda parcial: por ejemplo, escribir aus devuelve usuarios de Austria y Australia.
+
+## Autor
+
+
+Jandro Castro Alarcón -- @https://github.com/JandroCastro
