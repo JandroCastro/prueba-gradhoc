@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User } from './usersTypes';
+import { adaptUsers } from './usersAdapter';
 
-export const fetchUsers = createAsyncThunk<User[]>(
+export const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
   async () => {
-    const response = await fetch('https://randomuser.me/api/?results=100');
-    const data = await response.json();
-    return data.results;
+    const res = await fetch('https://randomuser.me/api/?results=100');
+    const data = await res.json();
+    return adaptUsers(data.results);
   }
 );

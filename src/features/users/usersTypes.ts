@@ -1,11 +1,9 @@
 export interface User {
-    name: {
-      first: string;
-      last: string;
-    };
-    email: string;
-    picture: {
-      thumbnail: string;
-    };
-  }
-  
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  country: string;
+  age: number;
+  picture: string;
+}
